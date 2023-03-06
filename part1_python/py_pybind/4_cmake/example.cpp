@@ -1,3 +1,5 @@
+// Example 4: Same as example 3, but build with cmake
+
 #include <string>
 #include <vector>
 #include <map>
@@ -27,7 +29,7 @@ private:
 namespace py = pybind11;
 
 PYBIND11_MODULE(example, m) {
-    m.doc() = "pybind example 3";
+    m.doc() = "pybind example 4";
     
     py::class_<Hero>(m, "Hero").def(py::init<int>()).def("getAge", &Hero::getAge);
 }

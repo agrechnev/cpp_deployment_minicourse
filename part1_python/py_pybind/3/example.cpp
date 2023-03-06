@@ -1,3 +1,5 @@
+// Example 3: Wrapping a C++ class by pybind
+
 #include <string>
 #include <vector>
 #include <map>

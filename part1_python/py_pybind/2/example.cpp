@@ -1,3 +1,5 @@
+// Example 2: Vectors, strings, maps are auto-converted to python types by pybind
+
 #include <string>
 #include <vector>
 #include <map>
