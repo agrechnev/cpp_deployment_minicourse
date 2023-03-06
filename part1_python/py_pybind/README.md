@@ -1,8 +1,8 @@
 Calling C++ code from Python using pybind11
 ============
 
-Installing prerequisites on Linux:  
-`sudo apt install build-essential cmake`  
+Installing prerequisites on Ubuntu/Debian Linux:  
+`sudo apt install build-essential cmake libeigen3-dev`  
 `pip3 install pybind11 numpy`  
 
 Installing prerequisites on Windows or MacOS:  
