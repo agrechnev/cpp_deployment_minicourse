@@ -1,0 +1,3 @@
+*.so
+build
+.ipynb_checkpoints
