@@ -15,7 +15,7 @@ We are going to build ONNX runtime from the source and install it by hand to `${
 `git clone --recursive https://github.com/microsoft/onnxruntime`  
 `cd onnxruntime`  
 We are using the `main` branch of ONNX runtime which is currently version 1.15. If you want another version, check it out  
-`git checkout v1.13.1`  
+`git checkout v1.14.0`  
 Use `git tag` for the complete list.  
 3. ONNX runtime wants really recent CMake versions (3.24 at the moment of writing this), which Ubuntu does not provide. Luckily, snap comes to the rescue.  
 `sudo snap install cmake`  
