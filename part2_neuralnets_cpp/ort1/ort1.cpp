@@ -17,7 +17,7 @@ int main(){
     
     // Create the "environment" with logger
     // Change this to ORT_LOGGING_LEVEL_INFO and see what happens !
-    Ort::Env env(ORT_LOGGING_LEVEL_FATAL); 
+    Ort::Env env(ORT_LOGGING_LEVEL_WARNING); 
 
     // Create session and load the ONNX file
     Ort::Session sess(env, "./m.onnx", Ort::SessionOptions());
@@ -42,19 +42,15 @@ int main(){
     }
 
     // Create data as float vectors
-    vector<float> x{2.f, 1.f, -2.f};
-    vector<float> y(2);
+    vector<float> x{2.f, 1.f, -2.f}, y(2);
     // Wrap the data with ORT tensors (no copying)
-    vector<Ort::Value> inputTensors;
-    vector<Ort::Value> outputTensors;
     Ort::MemoryInfo memoryInfo = Ort::MemoryInfo::CreateCpu(OrtAllocatorType::OrtArenaAllocator, OrtMemType::OrtMemTypeDefault);
-    int64_t shapeIn[] = {3};
-    int64_t shapeOut[] = {2};
+    int64_t shapeIn[] = {3}, shapeOut[] = {2};
+    vector<Ort::Value> inputTensors, outputTensors;
     inputTensors.push_back(Ort::Value::CreateTensor<float>(memoryInfo, x.data(), 3, shapeIn, 1));
     outputTensors.push_back(Ort::Value::CreateTensor<float>(memoryInfo, y.data(), 2, shapeOut, 1));
 
-    vector<const char*> inputNames{"input1"};
-    vector<const char*> outputNames{"output1"};
+    vector<const char*> inputNames{"input1"}, outputNames{"output1"};
 
     sess.Run(Ort::RunOptions{nullptr}, inputNames.data(), inputTensors.data(), 1, outputNames.data(), outputTensors.data(), 1);
 
