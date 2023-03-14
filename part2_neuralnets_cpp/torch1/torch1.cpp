@@ -43,10 +43,19 @@ at::Tensor img2tensor(const cv::Mat &img) {
 //======================================================================================================================
 int main() {
     using namespace std;
+    
+    if (false){
+        // Some simple tensor operations
+        at::Tensor a = torch::tensor({7., 3., 10.});
+        at::Tensor b = torch::ones(3);
+        at::Tensor c = torch::eye(3);
+        at::Tensor d = torch::matmul(c, a * b + b);
+        cout << "d = " << d << endl;
+    }
+    
 
     // Load model
-    torch::jit::script::Module model;
-    model = torch::jit::load("resnet50_traced.pt");
+    torch::jit::script::Module model = torch::jit::load("resnet50_traced.pt");
 
     // Load image, convert to RGB, downsize
     cv::Mat img = cv::imread("../../images/gpig1.jpg");
