@@ -120,7 +120,7 @@ int main() {
     using namespace cv;
 
     // Create the "environment" with logger
-    // Change this ORT_LOGGING_LEVEL_INFO and see what happens !
+    // Change this to ORT_LOGGING_LEVEL_INFO and see what happens !
     Ort::Env env(ORT_LOGGING_LEVEL_WARNING);
 
     // Create session and load the ONNX file

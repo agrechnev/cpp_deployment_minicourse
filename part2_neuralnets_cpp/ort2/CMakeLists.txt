@@ -8,13 +8,13 @@ if(NOT DEFINED ${ORT_ROOT})
 endif()
 message("ORT_ROOT = ${ORT_ROOT}")
 
+include_directories(${ORT_ROOT}/include)
+link_directories(${ORT_ROOT}/lib)
+
 
 # Find OpenCV
 find_package( OpenCV REQUIRED )
 include_directories( ${OpenCV_INCLUDE_DIRS} )
-
-include_directories(${ORT_ROOT}/include)
-link_directories(${ORT_ROOT}/lib)
 
 set(ORT_LIBS onnxruntime)
 

@@ -2,4 +2,5 @@ build/
 cmake-build-*/
 .idea/
 *.onnx
+*.pt
 __pycache__/
