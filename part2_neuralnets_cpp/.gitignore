@@ -3,4 +3,5 @@ cmake-build-*/
 .idea/
 *.onnx
 *.pt
+*.tflite
 __pycache__/
