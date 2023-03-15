@@ -21,4 +21,5 @@ output_details = interpreter.get_output_details()
 interpreter.set_tensor(input_details[0]['index'], img)
 interpreter.invoke()
 out_data = interpreter.get_tensor(output_details[0]['index'])
+#print('out_idx=', output_details[0]['index'])
 print('CLASS =', out_data.squeeze().argmax())    # 338
