@@ -21,6 +21,37 @@ cv::Mat img2tensor(cv::Mat &img) {
 }
 
 //======================================================================================================================
+inline void printTensInfo(const TfLiteTensor *t) {
+    using namespace std;
+    cout << "name=\"" << t->name << "\", dtype=" << t->type << ", dims=";
+    for (int i = 0; i < t->dims->size; ++i) {
+        if (i > 0)
+            cout << "x";
+        cout << t->dims->data[i];
+    }
+    cout << endl;
+}
+
+void printModel(const tflite::Interpreter &interpreter) {
+    using namespace std;
+    cout << "=======================================" << endl;
+    cout << "INPUTS :" << endl;
+    for (int idx: interpreter.inputs()) {
+        cout << idx << " : ";
+        const TfLiteTensor *t = interpreter.tensor(idx);
+        printTensInfo(t);
+    }
+
+    cout << "OUTPUTS :" << endl;
+    for (int idx: interpreter.outputs()) {
+        cout << idx << " : ";
+        const TfLiteTensor *t = interpreter.tensor(idx);
+        printTensInfo(t);
+    }
+    cout << "=======================================" << endl;
+}
+
+//======================================================================================================================
 int main() {
     using namespace std;
     using namespace cv;
@@ -36,6 +67,9 @@ int main() {
     CV_Assert(interpreter != nullptr);
     CV_Assert(interpreter->AllocateTensors() == kTfLiteOk);
 //    tflite::PrintInterpreterState(interpreter.get());
+
+    // Optional: print model information
+    printModel(*interpreter);
 
     // Load image
     Mat img = imread("../../images/gpig1.jpg");
