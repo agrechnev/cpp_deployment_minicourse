@@ -1,7 +1,7 @@
-JNI example 1: A minimal JNI example
+JNI example 2: Arguments, return values
 ==============
 
-Here I create a Java class `com.example.Hello` with a native method `sayHi`.
+Here I create a Java class `com.example.Hello` with native methods `addInt`, `addStr`.
 
 How to build this. First, make sure you have JDK installed, the environment
 variable `JAVA_HOME` is set (to the JDK root), and `${JAVA_HOME}/bin` is in
@@ -26,8 +26,6 @@ To run the Java code:
 The option here is needed to tell the JVM where to look for the `.so` files (current directory in this case). Alternatively, on Linux you can use:
 
 `export LD_LIBRARY_PATH=.`
-
-
 
 
 Note: The file `com_example_Hello.h` was auto-generated with

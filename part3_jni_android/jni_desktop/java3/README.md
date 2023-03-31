@@ -1,16 +1,16 @@
-JNI example 1: A minimal JNI example
+JNI example 3: Wrapping a C++ class with JNI corrrectly
 ==============
 
-Here I create a Java class `com.example.Hello` with a native method `sayHi`.
+Here I create a Java class `com.example.Box` which wraps a C++ class `BoxImpl`.
 
 How to build this. First, make sure you have JDK installed, the environment
 variable `JAVA_HOME` is set (to the JDK root), and `${JAVA_HOME}/bin` is in
 `PATH`. You will also need a C++ compiler.
 
 
-To build the Java code (creates `com/example/Hello.class`):  
+To build the Java code (creates `com/example/*.class`):  
 
-`javac com/example/Hello.java`  
+`javac com/example/Hello.java com/example/Box.java`  
 
 To build the C++ code on Linux (creates `libidiot.so`):  
 
@@ -27,11 +27,3 @@ The option here is needed to tell the JVM where to look for the `.so` files (cur
 
 `export LD_LIBRARY_PATH=.`
 
-
-
-
-Note: The file `com_example_Hello.h` was auto-generated with
-
-`javac -h . com/example/Hello.java`  
-
-But you don't have to repeat this step!
