@@ -1,4 +1,4 @@
-
+/// Kotlin example 2: arguments and return values
 
 package com.example
 
