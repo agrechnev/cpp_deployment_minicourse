@@ -1,3 +1,4 @@
 *.so
 *.dll
 *.class
+META-INF
