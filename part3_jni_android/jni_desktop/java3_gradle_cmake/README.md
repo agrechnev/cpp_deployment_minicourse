@@ -16,4 +16,5 @@ How to build this project?
 `cmake ../src_cpp/`  
 `make`  
 `cd ..`  
+`export LD_LIBRARY_PATH=$(pwd)/build_cpp`  
 `gradle run`  
