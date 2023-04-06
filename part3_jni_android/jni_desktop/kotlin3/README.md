@@ -1,11 +1,11 @@
 JNI kotlin examples
 ================
 
-Here I repeat the three JNI examples in Kotlin. The C++ part is exactly the same.
+Here I repeat the JNI examples in Kotlin. The C++ part is exactly the same.
 
 To build and run:  
 `./build.sh`  
-`kotinc hello.kt`  
+`kotlinc hello.kt`  
 `export LD_LIBRARY_PATH=.`  
 `kotlin com.example.HelloKt`  
 
