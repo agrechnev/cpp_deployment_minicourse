@@ -18,6 +18,9 @@ JNIEXPORT void JNICALL Java_com_example_Box_ctorCPP(JNIEnv *env, jobject thisObj
     // Create a C++ box on heap
     BoxImpl * pBox = new BoxImpl(std::string(pS));
     
+    // Release pS
+    env->ReleaseStringUTFChars(s, NULL);
+    
     // Find class field named "handle" in thisObj
     jclass thisClass = env->GetObjectClass(thisObj);
     jfieldID fieldHandle = env->GetFieldID(thisClass, "handle", "J");  // "J" means long !

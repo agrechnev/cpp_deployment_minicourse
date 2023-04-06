@@ -16,12 +16,18 @@ JNIEXPORT jint JNICALL Java_com_example_Hello_addInt  (JNIEnv * env, jobject thi
 JNIEXPORT jstring JNICALL Java_com_example_Hello_addStr  (JNIEnv * env, jobject thisObj, jstring a, jstring b) {
     using namespace std;
     
-    // Get raw pointers from Java strings, no copying
+    // Get raw pointers from Java strings
+    // Data can be copied or not, it's up to the JNI
     const char * aP = env->GetStringUTFChars(a, NULL);
     const char * bP = env->GetStringUTFChars(b, NULL);
     
     // Create C++ strings and concatenate, the data is copied
     string s = string(aP) + string(bP);
+    
+    // Now that we don't need aP, bP anymore, we release them
+    // Otherwise MEMORY LEAK !!!
+    env->ReleaseStringUTFChars(a, aP);
+    env->ReleaseStringUTFChars(b, bP);
     
 //     cout << "s = " << s << endl;
     
