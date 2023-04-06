@@ -13,13 +13,13 @@
 /// The "native constructor", here we create a C++ object and store its pointer in the Java field handle
 JNIEXPORT void JNICALL Java_com_example_Box_ctorCPP(JNIEnv *env, jobject thisObj, jstring s) {
     // Raw pointer to string
-    const char * pS = env->GetStringUTFChars(s, NULL);
+    const char * pS = env->GetStringUTFChars(s, nullptr);
     
     // Create a C++ box on heap
     BoxImpl * pBox = new BoxImpl(std::string(pS));
     
     // Release pS
-    env->ReleaseStringUTFChars(s, NULL);
+    env->ReleaseStringUTFChars(s, pS);
     
     // Find class field named "handle" in thisObj
     jclass thisClass = env->GetObjectClass(thisObj);

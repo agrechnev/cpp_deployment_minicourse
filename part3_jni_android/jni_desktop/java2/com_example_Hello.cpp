@@ -18,8 +18,8 @@ JNIEXPORT jstring JNICALL Java_com_example_Hello_addStr  (JNIEnv * env, jobject 
     
     // Get raw pointers from Java strings
     // Data can be copied or not, it's up to the JNI
-    const char * aP = env->GetStringUTFChars(a, NULL);
-    const char * bP = env->GetStringUTFChars(b, NULL);
+    const char * aP = env->GetStringUTFChars(a, nullptr);
+    const char * bP = env->GetStringUTFChars(b, nullptr);
     
     // Create C++ strings and concatenate, the data is copied
     string s = string(aP) + string(bP);
