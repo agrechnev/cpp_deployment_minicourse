@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
             bm.getPixels(pix, 0, imW, 0, 0, imW, imH);
 
             // Modify pixels in C++, note: no OpenCv yet !
+            // Note: despite the name the pixels here are in fact BGRA !
             modifyPixels(pix, imW, imH)
 
             // Create a new bitmap from these pixes
@@ -53,6 +54,7 @@ class MainActivity : AppCompatActivity() {
             bmNew = bm.copy(Bitmap.Config.ARGB_8888, true)
 
             // Modify it in the C++
+            // Note: in C++ the pixels will be RGBA !
             modifyBitmap(bmNew)
         }
 
