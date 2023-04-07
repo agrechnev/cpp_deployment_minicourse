@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
     external fun writeText(fileName: String)
 
     companion object {
-        // Used to load the 'jniandroid' library on application startup.
+        // Used to load the 'app2' library on application startup.
         init {
             System.loadLibrary("app2")
         }
