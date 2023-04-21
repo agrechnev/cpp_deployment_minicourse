@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>WASM fun1</title>
+<script src='myadd.js'></script>
+</head>
+<body>
+<script>
+"use strict";
+function clickedAdd(){
+    let x1 = document.getElementById('num1').value;
+    x1 = parseInt(x1);
+    let x2 = document.getElementById('num2').value;
+    x2 = parseInt(x2);
+    let x = Module._int_add(x1, x2);
+    console.log(`${x1} + ${x2} = ${x} !!!`);
+    let r = document.getElementById('res');
+    r.value = x;
+}
+
+function clickedText(){
+    let s1 = document.getElementById('te1').value;
+    console.log(`text=${s1}`);
+    let s2 = Module.ccall('dup_str', 'string', ['string'], [s1]);
+    document.getElementById('te2').value = s2;
+}
+</script>
+My webpage body <br>
+<input type="number" id="num1" name="num1"></input>  
+<input type="number" id="num2" name="num2"></input>  
+<button onclick="clickedAdd()">Add</button> 
+<input type="number" id="res" name="res"></input> 
+
+<br><br>
+
+<input type="text" id="te1" name="te1"></input> 
+<button onclick="clickedText()">Text</button> 
+<input type="text" id="te2" name="te2"></input> 
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>WASM Fun 2: Upload file and send to WASM</title>
+<script src="build/pfile.js"></script>
+</head>
+<body>
+Upload a text file:<br>
+<input type="file" onchange="readFile(this)"></input>
+
+<script>
+"use strict";
+// Read file using FileReader
+function readFile(inp){
+    const file = inp.files[0]
+    const reader = new FileReader();
+    
+    reader.onload = (e) => {
+        console.log('SUCCESS');
+        // File content as Uint8Array, could be binary, no JS strings
+        const u8a = new Uint8Array(reader.result);
+        const nBytes = u8a.byteLength;
+        console.log(`nBytes = ${nBytes}`);
+        // Now, allocate data on the C++ heap, then copy
+        const dataPtr = Module._malloc(nBytes);
+        const dataHeap = new Uint8Array(Module.HEAP8.buffer, dataPtr, nBytes);
+        dataHeap.set(u8a);  // copy !
+        // Call the C++ function
+        _print_file(dataPtr, nBytes);
+        // Free data on the C++ heap
+        Module._free(dataPtr);
+    };
+    
+    reader.onerror = (e) => {
+        console.log('ERROR', reader.error);
+    };
+    
+    reader.readAsArrayBuffer(file);
+    
+}
+</script>
+
+</body>
+</html>
