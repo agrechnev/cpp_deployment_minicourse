@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Emscripten fun3: modules</title>
+</head>
+<body>
+
+<script type="module">
+"use strict";
+import Module from './build/mymul.js';
+
+// Once module is loaded, we run the C++ code
+Module().then(function(mymod){
+    console.log(mymod._mymul(3, 7.1));
+})
+
+
+</script>
+
+</body>
+</html>
