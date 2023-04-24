@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>WASM fun5: embind</title>
+<script src='build/hero.js'></script>
+</head>
+<body>
+<script>
+"use strict";
+
+// Wait for emscripten to load before running this
+Module.onRuntimeInitialized = function() {
+    // Create a Hero object
+    let h = new Module.Hero('Brianna');
+    console.log(`h.getS() = ${h.getS()}`);
+    // Now delete the C++ object, JS is unreliable for this !
+    h.delete();
+};
+    
+</script>
+
+</body>
+</html>
