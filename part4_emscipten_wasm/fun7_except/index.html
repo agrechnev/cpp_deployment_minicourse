@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>WASM fun7: exceptions</title>
+<script src='build/excep.js'></script>
+</head>
+<body>
+<script>
+"use strict";
+
+// Wait for emscripten to load before running this
+Module.onRuntimeInitialized = function() {
+
+    // Test exceptions in C++
+    Module._excep_fun();
+};
+    
+</script>
+
+</body>
+</html>
