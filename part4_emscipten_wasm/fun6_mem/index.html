@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>WASM fun6: memory</title>
+<script src='build/mem.js'></script>
+</head>
+<body>
+<script>
+"use strict";
+
+// Wait for emscripten to load before running this
+Module.onRuntimeInitialized = function() {
+
+    console.log('Before', Module.HEAP8.buffer.byteLength / (1024*1024), ' MiB');
+
+    // Test memory allocation in C++
+    Module._mem_fun();
+    
+    console.log('After', Module.HEAP8.buffer.byteLength / (1024*1024), ' MiB');
+};
+    
+</script>
+
+</body>
+</html>
