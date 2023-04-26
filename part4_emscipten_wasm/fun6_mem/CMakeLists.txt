@@ -7,4 +7,13 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release)
 endif(NOT CMAKE_BUILD_TYPE)
 
+# To increase the C++ heap size from the default 16 Mb
+
+# Either staticaly
+
+#set(CMAKE_CXX_FLAGS "-s TOTAL_MEMORY=1100MB")
+
+# Or enable growth
+set(CMAKE_CXX_FLAGS "-sALLOW_MEMORY_GROWTH")
+
 add_executable(mem mem.cpp)

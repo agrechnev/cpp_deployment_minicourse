@@ -48,9 +48,28 @@ extern "C" {
             }
         }
         
+        {
+            // Check that 1GB memory actually works
+            size_t n = 256 * 1024 * 1024;
+            cout << "n = " << n << endl;
+            
+            
+            size_t *p = new size_t [n];
+            for (size_t i=1; i < n; ++i) {
+                p[i] = i;
+            }
+            for (size_t i=1; i < n; ++i) {
+                if (p[i] != i) {
+                    cout << "FAILURE i=" << i << endl;
+                    break;
+                }
+            }
+            delete [] p;
+        }
+        
         
         // Alocate 2GB and leave it allocated
-        malloc(2u * 1024 * 1024 * 1024);
+//         malloc(2u * 1024 * 1024 * 1024);
     }
 
 }
