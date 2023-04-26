@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>WASM fun8: threads</title>
+<script src='build/mycpp.js'></script>
+</head>
+<body>
+<script>
+"use strict";
+
+// Wait for emscripten to load before running this
+Module.onRuntimeInitialized = function() {
+
+    console.log('ISOLATED =', self.crossOriginIsolated);
+
+    // Test threads in C++
+    Module._cpp_fun();
+};
+    
+</script>
+
+</body>
+</html>
