@@ -1,4 +1,4 @@
-// Fun 7: C++ exceptions
+// Fun 8: multithread
 
 #include <thread>
 #include <vector>

@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>WASM fun9: opencv</title>
+<script src='build/mycpp.js'></script>
+</head>
+<body>
+<script>
+"use strict";
+
+// Wait for emscripten to load before running this
+Module.onRuntimeInitialized = function() {
+
+    // Test opencv in C++
+    Module._cpp_fun();
+};
+    
+</script>
+
+</body>
+</html>
