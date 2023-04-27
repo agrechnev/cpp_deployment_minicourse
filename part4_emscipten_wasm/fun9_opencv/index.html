@@ -12,11 +12,57 @@
 // Wait for emscripten to load before running this
 Module.onRuntimeInitialized = function() {
 
-    // Test opencv in C++
-    Module._cpp_fun();
+    const img1 = document.getElementById('id_img1');
+    const canvas1 = document.getElementById('id_canvas1');
+    const canvas2 = document.getElementById('id_canvas2');
+    const ctx1 = canvas1.getContext('2d');
+    const ctx2 = canvas2.getContext('2d');
+
+    const imW = 500;
+    const imH = 206;
+    
+    // Copy image to canvas1, you cannot work with <img> tags directly
+    ctx1.drawImage(img1, 0, 0);
+    
+    // Get image data from canvas1 : RGBA pixels
+    const imData1 = ctx1.getImageData(0, 0, imW, imH);
+//     console.log(imData1);
+    const nBytes = imData1.data.byteLength;
+    console.assert(nBytes == 4*imW*imH, 'Something is fishy !');
+    
+    // Now, allocate data on the C++ heap, then copy imData1 there
+    const dataPtr = Module._malloc(nBytes);
+    let dataHeap = new Uint8ClampedArray(Module.HEAP8.buffer, dataPtr, nBytes);
+    let imData2 = new ImageData(dataHeap, imW, imH);
+    dataHeap.set(imData1.data);
+    
+    // ACHTUNG !!! If you allow C++ heap growth, things like Module.HEAP8.buffer can change on any C++ call !
+    // C++ pointers like dataPtr will be still OK
+    // But object like dataHeap and imData2 will become unusable
+    // To be safe, create them anew after each C++ call
+    
+    // Modify the image in C++ (in place)
+    Module._processImage(dataPtr, nBytes, imW, imH);
+    
+    // Put the modified image to the second canvas
+    ctx2.putImageData(imData2, 0, 0);
+    
+    // Free the C++ memory
+    Module._free(dataPtr);
+//     console.log(Module.HEAP8);   //Int8Array
 };
     
 </script>
+
+<img src="angry.jpg" id="id_img1" style="border:3px solid #00FF00;"></img>
+
+<br>
+
+<canvas id="id_canvas1"  width="500" height="206" style="border:3px solid #0000FF;"> </canvas>
+
+<br>
+
+<canvas id="id_canvas2"  width="500" height="206" style="border:3px solid #FF0000;"> </canvas>
 
 </body>
 </html>
